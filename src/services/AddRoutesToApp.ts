@@ -7,7 +7,7 @@ const addRoutesToApp = async (app: express.Application, service: string, service
   for (const route of routes) {
     const { method, path, description } = route;
     const routePath = `/${service}${path}`;
-    LoggingTool.info(`**Adding Route**
+    LoggingTool.info(`Adding Route
     Path: ${path}
     Method: ${method}
     Description: ${description}
