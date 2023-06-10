@@ -6,7 +6,6 @@ import { LoggingTool } from './src/services/loggingTool';
 import addRoutesToApp from './src/services/addRoutesToApp';
 
 const app = express();
-const port = 3000;
 
 // Retrieve service information and routes from microservices
 const retrieveServiceInformation = async () => {
