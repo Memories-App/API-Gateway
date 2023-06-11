@@ -44,3 +44,4 @@ services:
 networks:
   memories:
     driver: overlay
+    attachable: true

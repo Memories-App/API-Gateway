@@ -3,6 +3,7 @@
 # Check if the image exists
 if [[ "$(docker images -q api_gateway 2> /dev/null)" != "" ]]; then
     # Delete the existing image
+    docker image prune --filter "dangling=true"
     docker rmi api_gateway
 fi
 

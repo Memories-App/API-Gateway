@@ -21,8 +21,8 @@ const addRoutesToApp = async (app: express.Application, service: string, service
         const method = req.method;
 
         delete headers['content-length']
-      
-        const response = await fetch(url, { method: method, body: body, headers: headers });        
+        
+        const response = await fetch(url, { method: method, body: body, headers: headers });     
 
         const data = await response.json();
         res.json(data);
