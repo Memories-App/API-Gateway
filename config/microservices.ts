@@ -1,3 +1,3 @@
 export const microservices = {
-    authentication: 'http://localhost:2902'
+    authentication: 'http://ms_authservice:4000'
 };
