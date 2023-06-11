@@ -10,7 +10,7 @@ const addRoutesToApp = async (app: express.Application, service: string, service
     LoggingTool.info(`Adding Route
     Path: ${path}
     Method: ${method}
-    Description: ${description}
+    Description: ${description || 'No description'}
     Availble at: http://API-GATEWAY${routePath}\n`)
     app.use(routePath, async (req: any, res) => {
       try {

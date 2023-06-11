@@ -22,6 +22,6 @@ echo Waiting for ms_authservice to be fully running...
 timeout /t 30 >nul
 
 REM Start api_gateway container
-docker run -d --network=memories --name=api_gateway -p 3000:3000 api_gateway:latest
+docker run -d --network=memories --name=api_gateway -p 3000:3000 -e ENV=production api_gateway:latest
 
 echo Cluster started successfully!
