@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  ms_authservice:
+    image: ms_authservice:latest
+    networks:
+      - memories
+    expose:
+      - "4000"
+    deploy:
+      replicas: 3
+      placement:
+        constraints:
+          - node.role == worker
+
+  api_gateway:
+    image: api_gateway:latest
+    networks:
+      - memories
+    environment:
+      - ENV=production
+    ports:
+      - "3000"
+    deploy:
+      replicas: 3
+      placement:
+        constraints:
+          - node.role == worker
+    depends_on:
+      - ms_authservice
+
+  nginx:
+    image: nginx:latest
+    networks:
+      - memories
+    ports:
+      - "80:80"
+      - "3000:3000"
+    depends_on:
+      - ms_authservice
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+
+networks:
+  memories:
+    driver: overlay

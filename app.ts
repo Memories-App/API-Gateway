@@ -19,13 +19,15 @@ if (environment === 'production') {
   microservices = microservicesDev;
 }
 
-const retryDelay = 15 * 1000; // Retry every 15 seconds
+const retryDelay = 10 * 1000; // Retry every 15 seconds
 const maxRetryAttempts = 15; // Maximum number of retry attempts
 
 const startServer = async () => {
   // Retry until all microservices are running and registered
   let retryAttempts = 0;
   let allMicroservicesRunning = false;
+
+  // Wait 30 seconds for all microservices to start
 
   while (!allMicroservicesRunning && retryAttempts < maxRetryAttempts) {
     try {
