@@ -1,4 +1,4 @@
-// routes.ts
+// add RouteToApp.ts
 
 import express from 'express';
 import { LoggingTool } from './loggingTool';
@@ -14,7 +14,8 @@ const addRoutesToApp = async (app: express.Application, service: string, service
     Availble at: http://API-GATEWAY${routePath}\n`)
     app.use(routePath, async (req, res) => {
       try {
-        const response = await fetch(`${serviceURL}${path}`, { method: req.method, body: req.body });
+        const response = await fetch(`${serviceURL}${path}${req.path.substring(1)}`, { method: req.method, body: req.body });        
+
         const data = await response.json();
         res.json(data);
       } catch (error: any) {

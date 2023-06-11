@@ -1,14 +1,29 @@
 // app.ts
 
 import express from 'express';
-import { microservices } from './config/microservices';
+import { microservicesProd, microservicesDev } from './config/microservices';
 import { LoggingTool } from './src/services/loggingTool';
 import addRoutesToApp from './src/services/addRoutesToApp';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 const app = express();
+let microservices: Object;
+
+const enviroment = process.env.ENV || 'production';
+
+if (enviroment === 'production') {
+  LoggingTool.info('Using Production Microservices');
+  microservices = microservicesProd;
+} else {
+  LoggingTool.info('Using Development Microservices');
+  microservices = microservicesDev;
+}
+  
 
 // Retrieve service information and routes from microservices
-const retrieveServiceInformation = async () => {
+(async () => {
   for (const [service, serviceURL] of Object.entries(microservices)) {
     try {
       // Check if service is running
@@ -35,6 +50,4 @@ const retrieveServiceInformation = async () => {
   app.listen(port, () => {
     LoggingTool.info(`API Gateway listening at http://localhost:${port}`);
   });
-};
-
-retrieveServiceInformation();
+})();
