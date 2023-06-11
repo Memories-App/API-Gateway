@@ -12,9 +12,17 @@ const addRoutesToApp = async (app: express.Application, service: string, service
     Method: ${method}
     Description: ${description}
     Availble at: http://API-GATEWAY${routePath}\n`)
-    app.use(routePath, async (req, res) => {
+    app.use(routePath, async (req: any, res) => {
       try {
-        const response = await fetch(`${serviceURL}${path}${req.path.substring(1)}`, { method: req.method, body: req.body });        
+
+        const url = `${serviceURL}${path}${req.path.substring(1)}`;
+        const headers: any = req.headers
+        const body = req.body;
+        const method = req.method;
+
+        delete headers['content-length']
+      
+        const response = await fetch(url, { method: method, body: body, headers: headers });        
 
         const data = await response.json();
         res.json(data);
