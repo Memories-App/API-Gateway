@@ -1,6 +1,15 @@
+# Text generated with: https://patorjk.com/software/taag/#p=display&f=Slant&t=API-Gateway
+# Font: Slant
+
 version: '3.8'
 
+
 services:
+#       ___         __  __   _____                 _         
+#      /   | __  __/ /_/ /_ / ___/___  ______   __(_)_______ 
+#     / /| |/ / / / __/ __ \\__ \/ _ \/ ___/ | / / / ___/ _ \
+#    / ___ / /_/ / /_/ / / /__/ /  __/ /   | |/ / / /__/  __/
+#   /_/  |_\__,_/\__/_/ /_/____/\___/_/    |___/_/\___/\___/ 
   ms_authservice:
     image: ms_authservice:latest
     networks:
@@ -13,6 +22,33 @@ services:
         constraints:
           - node.role == worker
 
+
+#       ____                          _____                 _         
+#      /  _/___ ___  ____ _____ ____ / ___/___  ______   __(_)_______ 
+#      / // __ `__ \/ __ `/ __ `/ _ \\__ \/ _ \/ ___/ | / / / ___/ _ \
+#    _/ // / / / / / /_/ / /_/ /  __/__/ /  __/ /   | |/ / / /__/  __/
+#   /___/_/ /_/ /_/\__,_/\__, /\___/____/\___/_/    |___/_/\___/\___/ 
+#                       /____/                                        
+  ms_imageservice:
+    image: ms_imageservice:latest
+    networks:
+      - memories
+    expose:
+      - "5000"
+    ports:
+      - "5000"
+    deploy:
+      replicas: 3
+      placement:
+        constraints:
+          - node.role == worker
+
+#       ___    ____  ____     ______      __                          
+#      /   |  / __ \/  _/    / ____/___ _/ /____ _      ______ ___  __
+#     / /| | / /_/ // /_____/ / __/ __ `/ __/ _ \ | /| / / __ `/ / / /
+#    / ___ |/ ____// /_____/ /_/ / /_/ / /_/  __/ |/ |/ / /_/ / /_/ / 
+#   /_/  |_/_/   /___/     \____/\__,_/\__/\___/|__/|__/\__,_/\__, /  
+#                                                            /____/   
   api_gateway:
     image: api_gateway:latest
     networks:
