@@ -42,6 +42,8 @@ services:
       placement:
         constraints:
           - node.role == worker
+    volumes:
+    - shared_data:/app/S3
 
 #       ___    ____  ____     ______      __                          
 #      /   |  / __ \/  _/    / ____/___ _/ /____ _      ______ ___  __
@@ -81,3 +83,6 @@ networks:
   memories:
     driver: overlay
     attachable: true
+
+volumes:
+  shared_data:
